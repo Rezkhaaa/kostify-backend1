@@ -4,145 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran Pemilik Kos - Kostify</title>
-
     <link rel="stylesheet" href="{{ asset('css/kostify-admin.css') }}">
 </head>
 <body class="owner-register-body">
 
 <div class="owner-register-bg"></div>
 
-<main class="owner-register-shell">
+<div class="owner-register-card">
 
-    <section class="owner-register-card">
-
-        <div class="owner-register-brand">
-            <div class="kostify-login-logo">
-                <img src="{{ asset('images/kostify-logo.png') }}"
-                     onerror="this.style.display='none';document.getElementById('logoFallback').style.display='grid';"
-                     alt="Kostify">
-
-                <span id="logoFallback" style="display:none;">KF</span>
-            </div>
-
-            <h1>Daftar Pemilik Kos</h1>
-
-            <p>
-                Data akan diperiksa Super Admin sebelum akun Admin Kos aktif.
-            </p>
+    <div style="text-align:center;margin-bottom:30px;">
+        <div class="kostify-login-logo" style="margin:0 auto 15px;">
+            <img src="{{ asset('images/kostify-logo.png') }}" alt="Kostify">
         </div>
 
-        @if($errors->any())
-            <div class="kostify-alert kostify-alert-danger">
-                <span>!</span>
-                {{ $errors->first() }}
-            </div>
-        @endif
+        <h1 style="margin:0;font-size:34px;font-weight:700;">
+            Daftar Pemilik Kos
+        </h1>
 
-        <form method="POST"
-              action="{{ route('admin.owner-register.store') }}"
-              class="kostify-login-form">
+        <p style="color:#64748b;margin-top:10px;">
+            Data akan diperiksa Super Admin sebelum akun Admin Kos aktif.
+        </p>
+    </div>
 
-            @csrf
+    @if($errors->any())
+        <div class="kostify-alert kostify-alert-danger">
+            {{ $errors->first() }}
+        </div>
+    @endif
 
-            <div class="kostify-field">
+    <form method="POST" action="{{ route('admin.owner-register.store') }}">
+        @csrf
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+
+            <div>
                 <label>Nama Pemilik</label>
-                <input
-                    type="text"
-                    name="owner_name"
-                    value="{{ old('owner_name') }}"
-                    required>
+                <input type="text" name="owner_name" value="{{ old('owner_name') }}" required>
             </div>
 
-            <div class="kostify-field">
+            <div>
                 <label>Email Admin</label>
-                <input
-                    type="email"
-                    name="email"
-                    value="{{ old('email') }}"
-                    required>
+                <input type="email" name="email" value="{{ old('email') }}" required>
             </div>
 
-            <div class="kostify-field">
+            <div>
                 <label>No. HP / WhatsApp</label>
-                <input
-                    type="text"
-                    name="phone"
-                    value="{{ old('phone') }}">
+                <input type="text" name="phone" value="{{ old('phone') }}">
             </div>
 
-            <div class="kostify-field">
+            <div>
                 <label>Nama Kos</label>
-                <input
-                    type="text"
-                    name="property_name"
-                    value="{{ old('property_name') }}"
-                    required>
+                <input type="text" name="property_name" value="{{ old('property_name') }}" required>
             </div>
 
-            <div class="kostify-field">
+            <div>
                 <label>Jenis Kos</label>
 
-                <select name="gender_type" required>
+                <select name="gender_type">
                     <option value="campuran">Kos Campuran</option>
                     <option value="putra">Kos Putra</option>
                     <option value="putri">Kos Putri</option>
                 </select>
             </div>
 
-            <div class="kostify-field">
+            <div>
                 <label>Jumlah Kamar</label>
-
-                <input
-                    type="number"
-                    name="room_count"
-                    value="{{ old('room_count') }}">
+                <input type="number" name="room_count" min="1" value="{{ old('room_count') }}">
             </div>
 
-            <div class="kostify-field">
+            <div style="grid-column:1 / span 2;">
                 <label>Alamat Kos</label>
-
-                <input
-                    type="text"
-                    name="property_address"
-                    value="{{ old('property_address') }}">
+                <input type="text" name="property_address" value="{{ old('property_address') }}">
             </div>
 
-            <div class="kostify-field">
+            <div>
                 <label>Password</label>
-
-                <input
-                    type="password"
-                    name="password"
-                    required>
+                <input type="password" name="password" required>
             </div>
 
-            <div class="kostify-field">
+            <div>
                 <label>Konfirmasi Password</label>
-
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    required>
+                <input type="password" name="password_confirmation" required>
             </div>
 
-            <button
-                type="submit"
-                class="kostify-main-btn"
-                style="margin-top:20px;">
+        </div>
+
+        <div style="margin-top:25px;display:flex;gap:15px;">
+
+            <button class="kostify-main-btn" style="flex:1;">
                 Kirim Pendaftaran
             </button>
 
-        </form>
-
-        <div class="kostify-login-footer">
-            <a href="{{ route('admin.login') }}">
+            <a href="{{ route('admin.login') }}"
+               style="flex:1;
+               text-align:center;
+               padding:14px;
+               background:#e2e8f0;
+               border-radius:12px;
+               text-decoration:none;
+               font-weight:700;
+               color:#334155;">
                 Kembali ke Login
             </a>
+
         </div>
 
-    </section>
+    </form>
 
-</main>
+</div>
 
 </body>
 </html>
